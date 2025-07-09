@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Gamepad2, ArrowRight, ArrowLeft, Check, Settings, Zap, Palette, Volume2, Star, Shield } from 'lucide-react';
+import GamePreview from '@/components/GamePreview';
 
 interface Template {
   id: number;
@@ -245,13 +246,15 @@ export default function GameBuilder() {
 
             {/* Step 3: Customize */}
             {currentStep === 3 && (
-              <div className="space-y-6">
+              <div className="space-y-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
+                {/* Customization Controls */}
+                <div className="lg:col-span-2 space-y-6">
                 <div className="text-center">
                   <p className="text-gray-600 mb-6">
                     Customize your game to make it unique
                   </p>
                 </div>
-                <div className="max-w-4xl mx-auto space-y-8">
+                <div className="space-y-8">
                   
                   {/* Theme Selection */}
                   <div>
@@ -460,6 +463,23 @@ export default function GameBuilder() {
                       </div>
                     </CardContent>
                   </Card>
+                </div>
+                </div>
+
+                {/* Game Preview */}
+                <div className="lg:col-span-1">
+                  <div className="sticky top-4">
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold text-center">Live Preview</h3>
+                      <p className="text-sm text-gray-600 text-center">See your changes in real-time</p>
+                    </div>
+                    <GamePreview
+                      gameName={gameName}
+                      selectedTemplate={selectedTemplate}
+                      customizations={customizations}
+                      templates={templates}
+                    />
+                  </div>
                 </div>
               </div>
             )}
