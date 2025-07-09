@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Gamepad2, ArrowRight, ArrowLeft, Check, Settings, Zap, Palette, Volume2, Star, Shield } from 'lucide-react';
 import GamePreview from '@/components/GamePreview';
+import GameTemplateCard from '@/components/GameTemplateCard';
 
 interface Template {
   id: number;
@@ -210,26 +211,12 @@ export default function GameBuilder() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {templates.map((template) => (
-                    <Card
+                    <GameTemplateCard
                       key={template.id}
-                      className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
-                        selectedTemplate === template.id
-                          ? 'ring-2 ring-blue-500 bg-blue-50'
-                          : 'hover:bg-gray-50'
-                      }`}
+                      template={template}
+                      isSelected={selectedTemplate === template.id}
                       onClick={() => setSelectedTemplate(template.id)}
-                    >
-                      <CardContent className="p-4">
-                        <div className="w-full h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-md mb-3 flex items-center justify-center">
-                          <Gamepad2 className="w-8 h-8 text-white" />
-                        </div>
-                        <h3 className="font-semibold text-sm mb-1">{template.name}</h3>
-                        <p className="text-xs text-gray-600 mb-2">{template.description}</p>
-                        <Badge className={`text-xs ${getDifficultyColor(template.difficulty)}`}>
-                          {template.difficulty}
-                        </Badge>
-                      </CardContent>
-                    </Card>
+                    />
                   ))}
                 </div>
                 {selectedTemplate && (
